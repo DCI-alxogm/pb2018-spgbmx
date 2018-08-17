@@ -1,0 +1,4 @@
+El ejercicio 1 funciona para calcular la edad de una persona, me tomé la libertad de cambiar el codigo original de la clase un poco mas "radical", en lugar de pedir la edad de la persona pide el año en que nació y se pide el año en el que desea saber su edad, así la persona tiene más posibilidades con el programa en lugar de poner un año en específico en el código.
+En los ejercicios 2 y 3 hicimos varias operaciones de numeros enteros y reales con las que podríamos ver cómo funciona la jerarquía en el orden de las operaciones aritméticas en una computadora.
+La diferencia entre 2 y 3 es que en el ejercicio 2 nos pide usar numeros enteros y en el ejercicio 3 nos pide utilizar numeros reales.
+En el ejercicio 4 nos piden analizar el programa limites.c, éste nos sirve para observar el máximo y mínimo de digitos o caracteres que podemos utilizar en los diferentes tipos de variables.
