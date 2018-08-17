@@ -3,7 +3,7 @@
 
 int main ()
 {
-	int a, b, c, d;
+	float a, b, c, d;
 	float e1, e2, e3, e4; //Aquí se usa float porque se esperan numeros reales
 	printf("Por favor introduce 4 numeros reales\n");
 	printf("Introduce a:");
