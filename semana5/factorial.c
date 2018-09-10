@@ -1,19 +1,26 @@
-//Este programa calcula el factorial de un n√∫mero
-//Creado por Patricia Godinez el 5 de Septiembre de 2018
-
+//Este programa calcula el factorial de un numero
+//Creado por Patricia Godinez el 6 de septiembre de 2018
 #include<stdio.h>
 
 int main ()
 {
-	int x, n, fac;
-	
-	printf("Introduce n=");
-	scanf("&i",&n);
+    int x, fa, n, op;
+    op=1;
+    while(op==1)
+    {
+        fa=1;
+        printf("\nIntroduce n=");
+        scanf("%i",&n);
 
-	for(x=1;x<=n;x++)
-	{
-		fac=x*n;
-		printf("n!=%i",fac);
-	}
+        for(x=1;x<=n;x++)
+        {
+            fa=fa*x;
+        }
+        printf("n!=%d \n",fa);
 
+        printf("øDeseas hacer otro c·lculo? (si/no) si=1  no=0\t");
+        scanf("%i",&op);
+    }
+
+return 0;
 }
