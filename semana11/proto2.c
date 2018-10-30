@@ -51,9 +51,12 @@ int main ()
     float Told[200][200]/*matriz para guardar los valores de las temperaturas de la matriz anterior*/,tol=100/*tolerancia*/;
     t=1;//contador de iteraciones.
     k=200; //numero maximo de iteraciones.
+    char nombre[256];//decalarando el contenedor del nombre para cada archivo.
     while(t<k)
     {
-        printf("//////////////////////////////////\n");// separador de matrices.
+        sprintf(nombre,"T_%i.txt",t);//creando un string que contenga el nombre que varia segun el numero de iteracion y lo guarda en "nombre"
+        FILE *f_ptr;//pointer para nuevo archivo.
+        f_ptr=fopen(nombre,"w");//abriendo el nuevo archivo generado con sprintf.
         for(i=1;i<=num-1;i++)
         {
             for(j=1;j<=num-1;j++)
@@ -86,10 +89,11 @@ int main ()
         {
             for(j=0;j<=num;j++)
             {
-                printf("%f\t",T[i][j]);
+                fprintf(f_ptr,"%f\t",T[i][j]);
             }
-            printf("\n");
+            fprintf(f_ptr,"\n");
         }
+        fclose(f_ptr);//cerrando archivo.
         t++;
     }
 }
