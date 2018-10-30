@@ -16,19 +16,19 @@ int main ()
     fclose(fp);
     printf("%i\t%f\t%i\t%i\t%i\t%i\n",num,eps,iarr,iab,jder,jiz);//printf provisional para ver si se esta lleyendo el archivo.
 
-    for(i=0;i<=num;i++)//ciclos for para llenar los valores de los lados.
+    for(i=0;i<=num;i++)//ciclos for para llenar los valores de los lados.   //superior
     {
         T[i][num]=iarr;
     }
-    for(i=0;i<=num;i++)
+    for(i=0;i<=num;i++)//inferior
     {
         T[i][0]=iab;
     }
-    for(j=0;j<=num;j++)
+    for(j=0;j<=num;j++)//izquierda
     {
         T[0][j]=jiz;
     }
-    for(j=0;j<=num;j++)
+    for(j=0;j<=num;j++)//derecha
     {
         T[num][j]=jder;
     }
@@ -48,9 +48,9 @@ int main ()
     fclose(f0);
 
     int k, t;
-    float Told[200][200],tol=100;
-    t=1;//contador.
-    k=5; //numero maximo de iteraciones.
+    float Told[200][200]/*matriz para guardar los valores de las temperaturas de la matriz anterior*/,tol=100/*tolerancia*/;
+    t=1;//contador de iteraciones.
+    k=200; //numero maximo de iteraciones.
     while(t<k)
     {
         printf("//////////////////////////////////\n");// separador de matrices.
@@ -58,52 +58,43 @@ int main ()
         {
             for(j=1;j<=num-1;j++)
             {
-                T[i][j]=(T[i+1][j]+T[i-1][j]+T[i][j+1]+T[i][j-1])/4;
+                Told[i][j]=(T[i+1][j]+T[i-1][j]+T[i][j+1]+T[i][j-1])/4;//calculo del promedio de temperatura de cada punto de la placa.
                 //printf("T[%i][%i]=%f\n",i,j,T[i][j]);//Printf provisional
-                Told[i][j]=T[i][j];
-
-            }
-        }
-        if(tol>=eps)
-        {
-            for(i=0;i<=num;i++)
-            {
-                for(j=0;j<=num;j++)
+                tol=fabs((T[i][j]-Told[i][j])/Told[i][j]);//calculo de la tolerancia confonme van pasando la iteraciones.
+                //printf("iteracion=%i",t);
+                //printf("tol=%f\n",tol);
+                if(tol<eps)//comparando tolerancia con epsilon para decidir si se sigue realizando el programa o si debe terminar cuando se cumple la condicion.
                 {
-                    printf("%f\t",T[i][j]);
+                    printf("Se alcanzo la tolerancia maxima en la iteracion %i y la matriz en esta es: \n",t);
+                    for(i=0;i<=num;i++)
+                    {
+                        for(j=0;j<=num;j++)
+                        {
+                            printf("%f\t",T[i][j]);
+                        }
+                    }
+                    return 1;
                 }
-                printf("\n");
-            }
-            tol=abs((T[i][j]-Told[i][j])/Told[i][j]);
-        }
-        else
-        {
-            printf("Se ha alcanzado la tolerancia maxima.");
-            return 1;
-        }
-
-
-       /* int l=0;
-        for(l=0;l<k;l++);
-        {
-            FILE *ar[k];
-            char T[20];
-            sprintf(T,"T_%i.txt",l);
-            ar[l]=fopen(T,"w");
-            for(i=0;i<num;i++)
-            {
-                for(j=0;j<num;j++)
+                else
                 {
-                    fprintf(ar[l],"%f \t",T[i][j]);
+                    T[i][j]=Told[i][j];
                 }
-                fprintf(ar[l],"\n");
             }
-        }*/
+        }
+        //imprimiendo la matriz actual.
+        for(i=0;i<=num;i++)
+        {
+            for(j=0;j<=num;j++)
+            {
+                printf("%f\t",T[i][j]);
+            }
+            printf("\n");
+        }
         t++;
     }
 }
 
-void LlenaMatriz(int num, float T[200][200])
+void LlenaMatriz(int num, float T[200][200])//Esta funcion llena todos los puntos centrales de la matriz con ceros.
 {
     int i,j;
     for(i=1;i<num-1;i++)
